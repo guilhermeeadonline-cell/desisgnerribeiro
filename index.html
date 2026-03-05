@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RIBEIRO.DEV | Elite em Desenvolvimento Web</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        /* ESTILO GLOBAL (MANTIDO EXATAMENTE COMO ESTAVA) */
+        :root {
+            --primary: #8a2be2;
+            --primary-glow: rgba(138, 43, 226, 0.5);
+            --bg: #0a0a0a;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --text: #ffffff;
+            --gray: #888;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        
+        body { background-color: var(--bg); color: var(--text); overflow-x: hidden; }
+
+        #particles-js { position: fixed; width: 100%; height: 100%; z-index: -1; background-color: #050505; }
+
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 20px 10%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; background: rgba(0, 0, 0, 0.2); backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo { font-size: 1.5rem; font-weight: 900; letter-spacing: -1px; text-transform: uppercase; }
+        .logo span { color: var(--primary); text-shadow: 0 0 15px var(--primary); }
+
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 10%; }
+        .hero h1 { font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 900; line-height: 1.1; margin-bottom: 20px; }
+
+        .highlight {
+            background: linear-gradient(to right, #fff, var(--primary), #fff);
+            background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            animation: shine 3s linear infinite;
+        }
+
+        @keyframes shine { to { background-position: 200% center; } }
+
+        .cta-button {
+            position: relative; padding: 18px 45px; font-size: 1.1rem; font-weight: 700;
+            color: white; background: var(--primary); border: none; border-radius: 50px;
+            cursor: pointer; overflow: hidden; transition: 0.4s; text-decoration: none;
+            box-shadow: 0 0 20px var(--primary-glow); display: inline-block;
+        }
+
+        .cta-button:hover { transform: scale(1.05); box-shadow: 0 0 40px var(--primary); }
+
+        .services, .diagnostico, .transformacao, .faq { padding: 100px 10%; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
+
+        .card {
+            background: var(--card-bg); padding: 40px; border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(5px);
+        }
+
+        .card:hover { background: rgba(138, 43, 226, 0.05); border-color: var(--primary); transform: translateY(-15px); }
+        .card i { font-size: 2.5rem; color: var(--primary); margin-bottom: 20px; display: block; }
+
+        /* NOVA SEÇÃO DE DIAGNÓSTICO/IMPACTO (PORFÓLIO DE PROBLEMAS RESOVIDOS CONCEITUAIS) */
+        .diag-title { text-align: center; font-size: 2.5rem; margin-bottom: 20px; font-weight: 900; }
+        .diag-subtitle { text-align: center; color: var(--gray); font-size: 1.2rem; margin-bottom: 60px; max-width: 800px; margin-left: auto; margin-right: auto; }
+
+        .diag-card { 
+            position: relative; overflow: hidden; height: 350px; 
+            border: 1px solid rgba(255, 255, 255, 0.1); transition: 0.4s ease; 
+        }
+        
+        .diag-card::before { 
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+            background-size: contain; background-repeat: no-repeat; background-position: center; transition: 0.5s ease; z-index: -1; filter: grayscale(100%) brightness(50%); /* VISUAL MANTIDO */
+        }
+
+        /* USANDO OS ARQUIVOS SOLICITADOS, CONCEITO ATUALIZADO PARA PESSOAS DE IA COM MÁ REAÇÃO */
+        .diag-bg-1::before { background-image: url('fundo1.png'); } /* Requisito: Imagem de pessoa de IA mostrando estresse (substitui relógio conceitual cite: 1) */
+        .diag-bg-2::before { background-image: url('fundo2.png'); } /* Requisito: Imagem de pessoa de IA com má reação a ver maus resultados (substitui gráfico conceitual cite: 1) */
+        .diag-bg-3::before { background-image: url('fundo3.png'); } /* Requisito: Imagem de pessoa de IA frustrada tentando usar um site amador (substitui painel conceitual cite: 1) */
+
+        .diag-card:hover::before { filter: grayscale(0%) brightness(30%); transform: scale(1.1); }
+        .diag-card:hover { border-color: red; box-shadow: 0 0 30px rgba(255, 0, 0, 0.2); }
+
+        .diag-overlay { 
+            position: absolute; bottom: 0; left: 0; width: 100%; padding: 30px; 
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); z-index: 1; 
+        }
+
+        .diag-overlay h3 { font-size: 1.5rem; font-weight: 900; text-transform: uppercase; margin-bottom: 10px; color: #ff5555; text-shadow: 0 0 10px rgba(255,0,0,0.5); }
+        .diag-overlay p { color: var(--gray); font-size: 1rem; line-height: 1.4; }
+
+        /* NOVA SEÇÃO DE TRANSFORMAÇÃO/RESULTADOS */
+        .transform-section { background-color: var(--bg); position: relative; }
+        .transform-title { text-align: center; font-size: 2.5rem; margin-bottom: 20px; font-weight: 900; }
+        .transform-content { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; max-width: 800px; margin: 0 auto; }
+        
+        .results-checklist { list-style: none; display: flex; flex-direction: column; gap: 20px; align-items: flex-start; text-align: left; margin: 40px 0; font-size: 1.2rem; font-weight: 700; color: var(--primary); }
+        .results-checklist li { display: flex; align-items: center; gap: 15px; }
+        .results-checklist li i { font-size: 1.5rem; text-shadow: 0 0 10px var(--primary-glow); }
+
+        /* NOVA SEÇÃO FAQ (MANTENDO O ESTILO GLASS) */
+        .faq-title { text-align: center; font-size: 2.5rem; margin-bottom: 20px; font-weight: 900; }
+        .faq-container { max-width: 800px; margin: 50px auto; }
+        .faq-item { margin-bottom: 15px; border-radius: 15px; background: var(--card-bg); overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.05); transition: 0.3s; }
+        .faq-item:hover { background: rgba(138, 43, 226, 0.05); border-color: var(--primary); }
+        .faq-question { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 700; color: white; transition: 0.3s; }
+        .faq-question i { color: var(--primary); font-size: 1.1rem; transition: 0.3s; }
+        .faq-answer { padding: 0 25px; max-height: 0; overflow: hidden; transition: 0.3s ease-out; color: var(--gray); font-size: 0.95rem; line-height: 1.6; }
+        .faq-item.active .faq-answer { padding: 25px; max-height: 200px; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+        .faq-item.active .faq-question i { transform: rotate(180deg); }
+
+        /* WHATSAPP (MANTIDO EXATAMENTE) */
+        .btn-whats {
+            position: fixed; bottom: 30px; right: 30px; width: 65px; height: 65px;
+            background: #25d366; color: white; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 32px; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+            z-index: 9999; text-decoration: none; animation: pulse-green 2s infinite;
+        }
+
+        @keyframes pulse-green {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* FOOTER (REFINADO, MANTIDO ESTILO) */
+        footer {
+            padding: 60px 10%; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="particles-js"></div>
+
+    <nav>
+        <div class="logo"><i class="fas fa-fingerprint" style="color: var(--primary); margin-right: 10px;"></i>RIBEIRO<span>.DEV</span></div>
+        <a href="https://wa.me/5517997515685?text=Olá,%20solicito%20orçamento%20para%20uma%20Máquina%20de%20Resultados!" class="cta-button" style="padding: 10px 20px; font-size: 0.9rem;">Orçamento</a>
+    </nav>
+
+    <section class="hero">
+        <h1 data-aos="zoom-out-up">A Próxima Geração de <br><span class="highlight">Sites Profissionais</span></h1>
+        <p data-aos="fade-up" data-aos-delay="200" style="color: var(--gray); margin-bottom: 30px; max-width: 700px;">
+            Desenvolvemos interfaces de alta performance que transformam visitantes em clientes fiéis. Sua marca merece Design de Elite aliado a código limpo.
+        </p>
+        <div data-aos="fade-up" data-aos-delay="400">
+            <a href="#impacto" class="cta-button">SABER MAIS</a>
+        </div>
+    </section>
+
+    <section class="services" id="servicos">
+        <h2 style="text-align: center; font-size: 2.5rem;" data-aos="fade">Nossa <span style="color: var(--primary)">Expertise</span></h2>
+        <div class="grid">
+            <div class="card" data-aos="fade-right">
+                <i class="fas fa-code"></i>
+                <h3>Web Design Premium</h3>
+                <p>Layouts exclusivos criados do zero para destacar sua marca no mercado saturado.</p>
+            </div>
+            <div class="card" data-aos="fade-up">
+                <i class="fas fa-bolt"></i>
+                <h3>Velocidade Extrema</h3>
+                <p>Sites otimizados para carregar em milissegundos, garantindo a melhor experiência ao usuário.</p>
+            </div>
+            <div class="card" data-aos="fade-left">
+                <i class="fas fa-shield-halved"></i>
+                <h3>Segurança Total</h3>
+                <p>Implementação dos mais modernos protocolos de segurança para proteger seus dados.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="diagnostico" id="impacto">
+        <h2 class="diag-title" data-aos="fade">Seu Design Está te <span style="color: red;">Prejudicando?</span></h2>
+        <p class="diag-subtitle" data-aos="fade">Você está enfrentando problemas como:</p>
+        <div class="grid">
+            <div class="card diag-card diag-bg-1" data-aos="flip-left">
+                <div class="diag-overlay">
+                    <h3>Stress e Procrastinação</h3>
+                    <p>O design amador gera desgaste constante e adia suas conquistas.</p>
+                </div>
+            </div>
+            <div class="card diag-card diag-bg-2" data-aos="flip-up">
+                <div class="diag-overlay">
+                    <h3>Resultados Ruins</h3>
+                    <p>Sites antigos e amadores não geram vendas e afastam clientes em potencial.</p>
+                </div>
+            </div>
+            <div class="card diag-card diag-bg-3" data-aos="flip-right">
+                <div class="diag-overlay">
+                    <h3>Imagem Amadora</h3>
+                    <p>Layouts inconsistentes destroem sua credibilidade antes mesmo de você apresentar sua proposta.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="transform-section transformacao" id="resultados">
+        <h2 class="transform-title" data-aos="fade">Transforme Seu Site em Uma<br><span class="highlight">Máquina de Resultados!</span></h2>
+        <div class="transform-content" data-aos="fade-up">
+            <p style="color: var(--gray); margin-top: 20px;">Utilizamos design profissional estratégico e tecnologia de ponta para alavancar sua marca.</p>
+            
+            <ul class="results-checklist">
+                <li><i class="fas fa-check-double"></i> Desperte <strong style="color: white;">Confiança</strong> imediata.</li>
+                <li><i class="fas fa-check-double"></i> Aumente suas <strong style="color: white;">Vendas e Leads</strong>.</li>
+                <li><i class="fas fa-check-double"></i> Ganhe <strong style="color: white;">Credibilidade</strong> no mercado.</li>
+                <li><i class="fas fa-check-double"></i> <strong style="color: white;">Design Moderno</strong> e Atrativo.</li>
+                <li><i class="fas fa-check-double"></i> Experiência do Usuário <strong style="color: white;">Aprimorada</strong>.</li>
+            </ul>
+
+            <div style="margin-top: 40px;">
+                <a href="https://wa.me/5517997515685?text=Quero%20uma%20Máquina%20de%20Resultados!" class="cta-button">ENTRE EM CONTATO!</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq" id="faq">
+        <h2 class="faq-title" data-aos="fade">Perguntas <span style="color: var(--primary)">Frequentes</span></h2>
+        <div class="faq-container">
+            <div class="faq-item" data-aos="fade-up">
+                <div class="faq-question">Quanto tempo leva para criar um site profissional? <i class="fas fa-plus"></i></div>
+                <div class="faq-answer">O prazo varia conforme a complexidade. Projetos institucionais costumam levar entre 15 a 30 dias, enquanto Landing Pages focadas em conversão podem ser entregues em prazos mais curtos.</div>
+            </div>
+            <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
+                <div class="faq-question">Eu terei autonomia para gerenciar o conteúdo? <i class="fas fa-plus"></i></div>
+                <div class="faq-answer">Sim! Desenvolvemos o site com ferramentas amigáveis e fornecemos treinamento detalhado para que você e sua equipe possam atualizar textos, imagens e posts sem depender de programadores.</div>
+            </div>
+            <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
+                <div class="faq-question">O site é otimizado para aparecer no Google (SEO)? <i class="fas fa-plus"></i></div>
+                <div class="faq-answer">Sim! Implementamos todas as boas práticas de SEO (Search Engine Optimization) na estrutura do código. Isso inclui velocidade de carregamento, responsividade e tags corretas para ajudar seu site a ganhar relevância orgânica.</div>
+            </div>
+            <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
+                <div class="faq-question">Quais são as formas de pagamento disponíveis? <i class="fas fa-plus"></i></div>
+                <div class="faq-answer">Oferecemos flexibilidade de pagamento, incluindo parcelamento no cartão de crédito, boleto bancário e Pix com condições especiais para projetos de Máquina de Resultados.</div>
+            </div>
+        </div>
+    </section>
+
+    <footer data-aos="fade-up">
+        <p>&copy; 2026 RIBEIRO.DEV - Onde tecnologia de ponta encontra Design de Elite.</p>
+        <p style="font-size: 0.7rem; margin-top: 10px; color: #444;">Desenvolvido com tecnologia de ponta.</p>
+    </footer>
+
+    <a href="https://wa.me/5517997515685?text=Olá,%20vim%20pela%20Máquina%20de%20Resultados!%20Quero%20um%20orçamento." class="btn-whats" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Inicializar Animações de Scroll
+        AOS.init({ duration: 1000, once: true });
+
+        // Configuração das Partículas (MANTIDO)
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#8a2be2" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.5, "random": false },
+                "size": { "value": 3, "random": true },
+                "line_linked": { "enable": true, "distance": 150, "color": "#8a2be2", "opacity": 0.4, "width": 1 },
+                "move": { "enable": true, "speed": 2, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
+                "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 1 } }, "push": { "particles_nb": 4 } }
+            },
+            "retina_detect": true
+        });
+
+        // Lógica do FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', () => {
+                const parent = item.parentElement;
+                
+                if (parent.classList.contains('active')) {
+                    parent.classList.remove('active');
+                } else {
+                    parent.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
